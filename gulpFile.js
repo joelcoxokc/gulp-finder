@@ -1,18 +1,13 @@
 var gulp = require('gulp');
-
 var gulp = require('./index.js')(gulp);
+var path = require('path');
 
 
-gulp.task( 'store' , function(  ) {
-  this.storage.create( 'hello', 'joel.json' );
-  this.storage.set( 'me', 'joel' );
-  this.storage.set( 'this stuff', 'lakhdklaf;;asf' );
+gulp.task('default',  function(){
 
-})
+  var dirs = this.finder( path.join(__dirname+'', 'lib') );
 
-gulp.task('default', ['store'],  function(){
-
-  console.log(this.storage.get())
+  console.log(dirs)
 });
 
 
