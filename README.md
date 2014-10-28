@@ -1,6 +1,6 @@
 <!-- (PLUGIN AUTHOR: Please read [Plugin README conventions](https://github.com/wearefractal/gulp/wiki/Plugin-README-Conventions), then delete this line) -->
 
-# gulp-storage
+# gulp-finder
 <!-- [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] -->
 
 > storage plugin for [gulp](https://github.com/wearefractal/gulp)
@@ -8,16 +8,20 @@
 
 # Features
 
-- Gulp Storage uses Yeoman-Generator's storage plugin to simply save configurations in a local JSON file. 
-- Bind's a storage property to the the gulp instance. 
-- Within any gulp task, you can access the storage property by calling this.storage.
+- Gulp Finder uses fs.extra and recursively searches through the given directory, and creates an objbect that mirrors your directory structure.
+- Each directory within the Object now has a bunch of methods, which we will discuss down below.
+- Each method will either return a string or an array of paths.
+- Bind's a finder property to the the gulp instance. 
+
+
+> you can call gulp-finder from any gulp task, by calling `this.finder(path)`
 
 ## Usage
 
-First, install `gulp-storage` as a development dependency:
+First, install `gulp-finder` as a development dependency:
 
 ```shell
-npm install --save-dev gulp-storage
+npm install --save-dev gulp-finder
 ```
 
 Then, add it to your `gulpfile.js`:
@@ -27,81 +31,70 @@ Then, add it to your `gulpfile.js`:
 var gulp = require('gulp');
 
 // Do this
-var storage = require('gulp-storage')(gulp);
+var finder = require('gulp-finder')(gulp);
 
 // or do this
-require('gulp-storage')(gulp);
+require('gulp-finder')(gulp);
 
-gulp.storage.create('SomeName', 'somName.json');
-
-gulp.task( 'any', ['anotherTask'] function(){
-    var appName = this.storage.get('appName');
-    console.log(appName)
-    //=> myApp
-});
-
-gulp.task('anotherTask', function(){
-    this.storage.set('appName', 'myApp');
+gulp.task( 'any', function(){
+    var found = this.finder( './somePath/to/some/where' );
+    console.log(found)
+    //=> Object that looks similar to your directory.
 });
 ```
 
 ## API
 
-### storage.create( name, fileName );
-
-#### name
-- Type: `String`  
-- Default: `myApp`
-- Required: `true`
-
-The `name` property will be the root object key for anything set in your local storage file.
-
-#### fileName
-- Type: `String`
-- Default: `myApp.json`
-- Required: `true`
-- extension: `.json`
-
-The gulp-storage will create a Json file in your local directory, using the specified name;
-
-*Note* If you are using gulp-storage with a SlushJS Generator, gulp-storage will create the `json` file in the generated directory.
-The path will be `process.cwd();`
-
-
-### storage.set( key, value );
-
-#### key
-Type: `String`
-Required: `true`
+### finder['someDirectory'].path;
 
 #### value
-Type: `String`  
-Required: `true`
+```
+- Type: String
+- Descr: The path property will be the full path to someDirectory
+```
 
-storage.set will set a new property in your local storage file.
 
-### storage.get( key );
+### finder['someDirectory'].all( );
 
-#### key
-Type: `String` 
-Required: `false`
+#### value
+```
+Type: String
+Returns: the/full/path/to/the/current/directory + **/*
+```
 
-storage.get will retreive values from your local storage file.
-- You can pass a key property to get a specific value.
-- If no key is specified, storage.get will return everything in your local storage file.
 
-### storage.store( object );
 
-#### object
-Type: `Object`
-Required: `true`
+### finder['someDirectory'].dirs( `String` || `Array` );
 
-storage.store will set all properties and values within the object in your local storage file.
+#### arguments
+```
+Type: String || Array
+Default: '**'
+Required: false
+```
+
+### finder['someDirectory'].ext( `extension` );
+
+#### extension
+```
+Type: String
+Default: '*.*'
+Required: false
+```
+
+### finder['someDirectory'].any( String );
+
+#### String
+```
+Type: String || Array
+Default: '**'
+Required: false
+```
 
 
 ## TODO
-- Create a storage.clear(); ` // Delete everything`
-- Create a storage.delete( key ); ` // Delete a specific property`
+- Add More Methods
+- Find a better Library for recursively searching the directory;
 
 ## License
 
