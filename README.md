@@ -3,12 +3,12 @@
 # gulp-finder
 <!-- [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] -->
 
-> storage plugin for [gulp](https://github.com/wearefractal/gulp)
+> Directory Glob String plugin finder for [gulp](https://github.com/wearefractal/gulp)
 
 
 # Features
 
-- Gulp Finder uses fs.extra and recursively searches through the given directory, and creates an objbect that mirrors your directory structure.
+- Gulp Finder uses fs.extra and recursively searches through the given directory, and creates an object that mirrors your directory structure.
 - Each directory within the Object now has a bunch of methods, which we will discuss down below.
 - Each method will either return a string or an array of paths.
 - Bind's a finder property to the the gulp instance. 
