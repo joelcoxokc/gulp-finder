@@ -1,6 +1,6 @@
 {
-  "name": "gulp-storage",
-  "version": "1.0.6",
+  "name": "gulp-finder",
+  "version": "1.0.0",
   "description": "A plugin for Gulp",
   "keywords": [
     "gulpplugin",
@@ -10,16 +10,18 @@
     "util",
     "gulp-util",
     "json",
-    "configuration"
+    "configuration",
+    "files",
+    "fs",
+    "FilesSystems"
   ],
   "author": "Joel Cox <joelcox@hisimagination.com> (https://github.com/joelcoxokc)",
   "repository": {
     "type": "git",
-    "url": "git://github.com/JoelCoxOKC/gulp-storage"
+    "url": "git://github.com/JoelCoxOKC/gulp-finder"
   },
   "scripts": {
-    "test": "istanbul test _mocha --report html -- test/*.js --reporter spec",
-    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "index": "index.js"
   },
   "dependencies": {
     "fs.extra": "^1.2.1",
@@ -42,9 +44,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JoelCoxOKC/gulp-storage/issues"
+    "url": "https://github.com/JoelCoxOKC/gulp-finder/issues"
   },
-  "homepage": "https://github.com/JoelCoxOKC/gulp-storage",
+  "homepage": "https://github.com/JoelCoxOKC/gulp-finder",
   "main": "index.js",
   "directories": {
     "test": "test"
